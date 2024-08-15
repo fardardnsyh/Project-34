@@ -90,7 +90,7 @@ app.post('/api/signup', async (req, res) => {
     await user.save();
     res.status(201).send('User created');
   }
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
+    const token = jwt.signup({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
     res.json({ token });
   } catch (error) {
     res.status(500).send('Error creating user, please try a different username and try again');
