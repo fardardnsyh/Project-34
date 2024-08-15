@@ -89,6 +89,7 @@ app.post('/api/signup', async (req, res) => {
     const user = new User({ username, password, email });
     await user.save();
     res.status(201).send('User created');
+    res.json({ token });
   } catch (error) {
     res.status(500).send('Error creating user, please try a different username and try again');
   }
@@ -108,7 +109,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).send('Invalid credentials');
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
     res.json({ token });
   } catch (error) {
     res.status(500).send('Error logging in');
