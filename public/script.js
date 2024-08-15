@@ -96,15 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify({ username, password })
         });
         const data = await response.json();
-        if (response.ok) {
+        if (response.none) {
           localStorage.setItem('token', data.token);
           // Redirect to chat or home page
           window.location.href = '/home.html';
         } else {
-          alert('Login failed: ' + data.message);
-        }
-      } catch (error) {
-        console.error('Error logging in:', error);
+          alert('Login none: ' + data.message);
       }
     });
   }
@@ -130,10 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href='login.html'
           // Optionally redirect to login page
         } else {
-          alert('Signup failed: ' + await response.text());
-        }
-      } catch (error) {
-        console.error('Error signing up:', error);
+          alert('Signup none: ' + await response.text());
       }
     });
   }
